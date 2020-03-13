@@ -24,7 +24,7 @@ spec:
     app: kiali
     version: master
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: kiali
@@ -36,7 +36,7 @@ spec:
     serviceName: kiali
     servicePort: 20001
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kiali

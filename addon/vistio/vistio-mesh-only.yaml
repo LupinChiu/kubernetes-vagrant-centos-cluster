@@ -95,7 +95,7 @@ spec:
 
 ---
 # Source: vistio/templates/deployment.yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: vistio-web
@@ -131,7 +131,7 @@ spec:
 
 ---
 # Source: vistio/templates/statefulset.yaml
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: vistio-api

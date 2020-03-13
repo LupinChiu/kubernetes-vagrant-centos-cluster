@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
 # change time zone
-cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-timedatectl set-timezone Asia/Shanghai
-rm /etc/yum.repos.d/CentOS-Base.repo
-cp /vagrant/yum/*.* /etc/yum.repos.d/
-mv /etc/yum.repos.d/CentOS7-Base-163.repo /etc/yum.repos.d/CentOS-Base.repo
+# cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+# timedatectl set-timezone Asia/Shanghai
+cp /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+timedatectl set-timezone Asia/Taipei
+
+# lupin.20200311.台灣應該不需要做這個變動
+# rm /etc/yum.repos.d/CentOS-Base.repo
+# cp /vagrant/yum/*.* /etc/yum.repos.d/
+# mv /etc/yum.repos.d/CentOS7-Base-163.repo /etc/yum.repos.d/CentOS-Base.repo
+
 # using socat to port forward in helm tiller
 # install  kmod and ceph-common for rook
 yum install -y wget curl conntrack-tools vim net-tools telnet tcpdump bind-utils socat ntp kmod ceph-common dos2unix

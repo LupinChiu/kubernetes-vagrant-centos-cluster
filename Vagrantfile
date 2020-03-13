@@ -16,6 +16,10 @@ Vagrant.configure("2") do |config|
       node.vm.hostname = "node#{i}"
       ip = "172.17.8.#{i+100}"
       node.vm.network "private_network", ip: ip
+
+      sshPort = "230#{i}"
+      node.vm.network :forwarded_port, guest: 22, host: sshPort, id: 'ssh'
+    
       node.vm.provider "virtualbox" do |vb|
         vb.memory = "3072"
         vb.cpus = 1

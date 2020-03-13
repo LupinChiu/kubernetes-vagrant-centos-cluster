@@ -125,7 +125,7 @@ items:
       - kind: ServiceAccount
         name: weave-scope
         namespace: weave
-  - apiVersion: apps/v1beta1
+  - apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: weave-scope-app
@@ -197,7 +197,7 @@ items:
         app: weave-scope
         weave-cloud-component: scope
         weave-scope-component: app
-  - apiVersion: extensions/v1beta1
+  - apiVersion: apps/v1
     kind: DaemonSet
     metadata:
       name: weave-scope-agent
@@ -274,7 +274,7 @@ items:
       updateStrategy:
         type: RollingUpdate
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: weave-ingress
