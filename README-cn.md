@@ -209,11 +209,13 @@ vagrant ssh node1
 sudo -i
 cd /vagrant/addon/dashboard/
 mkdir certs
-openssl req -nodes -newkey rsa:2048 -keyout certs/dashboard.key -out certs/dashboard.csr -subj "/C=/ST=/L=/O=/OU=/CN=kubernetes-dashboard"
+openssl req -sha256 -utf8 -nodes -newkey rsa:2048 -keyout certs/dashboard.key -out certs/dashboard.csr -config ssl.conf
+# openssl req -nodes -newkey rsa:2048 -keyout certs/dashboard.key -out certs/dashboard.csr -subj "/C=TW/ST=Taiwan/L=Taipei/O=UDream Inc./OU=Design Department 1/CN=kubernetes-dashboard"
 openssl x509 -req -sha256 -days 365 -in certs/dashboard.csr -signkey certs/dashboard.key -out certs/dashboard.crt
 kubectl delete secret kubernetes-dashboard-certs -n kube-system
 kubectl create secret generic kubernetes-dashboard-certs --from-file=certs -n kube-system
-kubectl delete pods $(kubectl get pods -n kube-system|grep kubernetes-dashboard|awk '{print $1}') -n kube-system #重新创建dashboard
+# 重新创建dashboard
+kubectl delete pods $(kubectl get pods -n kube-system|grep kubernetes-dashboard|awk '{print $1}') -n kube-system
 ```
 刷新浏览器之后点击`高级`，选择跳过即可打开页面。
 
