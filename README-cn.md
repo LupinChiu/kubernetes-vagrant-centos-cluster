@@ -209,9 +209,13 @@ vagrant ssh node1
 sudo -i
 cd /vagrant/addon/dashboard/
 mkdir certs
-openssl req -sha256 -utf8 -nodes -newkey rsa:2048 -keyout certs/dashboard.key -out certs/dashboard.csr -config ssl.conf
-# openssl req -nodes -newkey rsa:2048 -keyout certs/dashboard.key -out certs/dashboard.csr -subj "/C=TW/ST=Taiwan/L=Taipei/O=UDream Inc./OU=Design Department 1/CN=kubernetes-dashboard"
-openssl x509 -req -sha256 -days 365 -in certs/dashboard.csr -signkey certs/dashboard.key -out certs/dashboard.crt
+# 重新 gen key 及 csr
+# openssl req -sha256 -utf8 -nodes -newkey rsa:2048 -keyout certs/dashboard.key -out certs/dashboard.csr -config ./udream-cert/udream.local/ssl.conf
+# 自簽憑證
+# openssl x509 -req -sha256 -days 365 -in certs/dashboard.csr -signkey certs/dashboard.key -out certs/dashboard.crt
+# 可以直接copy ./udream-cert/udream.local/ 下的已簽憑證 (只需要 .key 及 .crt) 到 ./certs/ 底下
+# cp ./udream-cert/udream.local/*.key ./certs/
+# cp ./udream-cert/udream.local/*.crt ./certs/
 kubectl delete secret kubernetes-dashboard-certs -n kube-system
 kubectl create secret generic kubernetes-dashboard-certs --from-file=certs -n kube-system
 # 重新创建dashboard
