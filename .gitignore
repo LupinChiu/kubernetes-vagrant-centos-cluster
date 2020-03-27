@@ -2,3 +2,4 @@
 .DS_Store
 *.tar.gz
 kubernetes
+addon/istio-1.5.0
