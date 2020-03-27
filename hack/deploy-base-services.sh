@@ -6,7 +6,7 @@ cd ../addon/dns
 ./dns-deploy.sh -r 10.254.0.0/16 -i 10.254.0.2 |kubectl apply -f -
 cd ../..
 echo "deploy kubernetes dashboard"
-kubectl apply -f addon/dashboard/kubernetes-dashboard.yaml
+kubectl apply -f addon/dashboard/recommended.yaml
 echo "create admin role token"
 kubectl apply -f yaml/admin-role.yaml
 echo "the admin role token is:"

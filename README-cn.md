@@ -218,6 +218,8 @@ mkdir certs
 # cp ./udream-cert/udream.local/*.crt ./certs/
 kubectl delete secret kubernetes-dashboard-certs -n kube-system
 kubectl create secret generic kubernetes-dashboard-certs --from-file=certs -n kube-system
+kubectl delete secret kubernetes-dashboard-csrf -n kube-system
+kubectl create secret generic kubernetes-dashboard-csrf --from-file=certs -n kube-system
 # 重新创建dashboard
 kubectl delete pods $(kubectl get pods -n kube-system|grep kubernetes-dashboard|awk '{print $1}') -n kube-system
 ```
@@ -290,8 +292,13 @@ hack/deploy-helm.sh
 到[Istio release](https://github.com/istio/istio/releases) 页面下载istio的安装包，安装istio命令行工具，将`istioctl`命令行工具放到你的`$PATH`目录下，对于Mac用户：
 
 ```bash
-wget https://github.com/istio/istio/releases/download/1.0.0/istio-1.0.0-osx.tar.gz
-tar xvf istio-1.0.0-osx.tar.gz
+wget https://github.com/istio/istio/releases/download/1.5.0/istio-1.5.0-linux.tar.gz
+tar xvf istio-1.5.0-linux.tar.gz
+
+# istioctl only
+wget https://github.com/istio/istio/releases/download/1.5.0/istioctl-1.5.0-linux.tar.gz
+tar xvf istioctl-1.5.0-linux.tar.gz
+
 mv bin/istioctl /usr/local/bin/
 ```
 
